@@ -2,17 +2,12 @@
   "name": "building-rules",
   "version": "0.1.1",
   "description": "Deliver complete engineering outcomes with proportionate investigation, implementation, verification and records.",
-  "author": {
-    "name": "rocky2431",
-    "url": "https://github.com/rocky2431"
-  },
-  "skills": [
-    "./skills"
-  ],
+  "author": { "name": "rocky2431" },
+  "skills": ["./plugins/building-rules/skills"],
   "hooks": [
     {
       "event": "UserPromptSubmit",
-      "command": "python3 \"./hooks/activate.py\" --host kimi",
+      "command": "python3 \"./plugins/building-rules/hooks/activate.py\" --host kimi",
       "timeout": 5
     }
   ]

@@ -10,7 +10,7 @@ Use it for features, debugging, refactoring and code review. It does not impose
 a fixed development ceremony, replace project instructions or turn unrelated
 writing and research into coding tasks.
 
-Version: 0.1.0. The optional lifecycle hook uses the Python standard library.
+Version: 0.1.1. The optional lifecycle hook uses the Python standard library.
 One shared Skill is packaged for Codex, Claude Code, Kimi Code and zCode.
 
 ## Install and use
@@ -38,9 +38,10 @@ Skill by name. The native hook supplies its brief core on supported events.
 
 ### Kimi Code and zCode
 
-Use the installed host's native plugin manager. Kimi Code loads
-`plugins/building-rules` through its `kimi.plugin.json`. zCode uses
-`building-rules@rocky-building-rules` from this repository's marketplace.
+In Kimi Code's plugin manager, install `https://github.com/rocky2431/building-rule-skill`.
+The repository-root `kimi.plugin.json` points to the shared package. zCode uses
+`building-rules@rocky-building-rules` from this repository's marketplace and loads
+only its supported SessionStart hook through `hooks/zcode.json`.
 Host installation interfaces vary; check the current native manager.
 
 Other Agent Skills hosts can load

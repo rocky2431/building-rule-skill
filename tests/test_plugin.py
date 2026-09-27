@@ -84,16 +84,29 @@ class PluginChecks(unittest.TestCase):
                      ".zcode-plugin/plugin.json", "kimi.plugin.json"]:
             manifest = json.loads((PLUGIN / name).read_text())
             self.assertEqual(manifest["name"], PLUGIN.name)
-            self.assertEqual(manifest["version"], "0.1.0")
+            self.assertEqual(manifest["version"], "0.1.1")
         codex = json.loads((ROOT / ".agents/plugins/marketplace.json").read_text())
         claude = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
         self.assertEqual(codex["name"], claude["name"])
         for source in [codex["plugins"][0]["source"]["path"], claude["plugins"][0]["source"]]:
             self.assertEqual((ROOT / source).resolve(), PLUGIN)
         self.assertTrue((PLUGIN / "skills/building-rules/SKILL.md").is_file())
-        kimi = json.loads((PLUGIN / "kimi.plugin.json").read_text())
-        for folder in kimi["skills"]:
-            self.assertTrue((PLUGIN / folder / "building-rules/SKILL.md").is_file())
+        for base in [ROOT, PLUGIN]:
+            kimi = json.loads((base / "kimi.plugin.json").read_text())
+            self.assertEqual(kimi["name"], PLUGIN.name)
+            self.assertEqual(kimi["version"], "0.1.1")
+            for folder in kimi["skills"]:
+                self.assertTrue((base / folder / "building-rules/SKILL.md").is_file())
+            result = subprocess.run(
+                kimi["hooks"][0]["command"], shell=True, cwd=base, text=True,
+                input=json.dumps({"hook_event_name": "UserPromptSubmit"}),
+                capture_output=True, timeout=5,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("Building Rules core", result.stdout)
+        zcode = json.loads((PLUGIN / ".zcode-plugin/plugin.json").read_text())
+        hooks = json.loads((PLUGIN / zcode["hooks"]).read_text())["hooks"]
+        self.assertEqual(set(hooks), {"SessionStart"})
 
 
 if __name__ == "__main__":

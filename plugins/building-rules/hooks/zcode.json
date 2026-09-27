@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/activate.py\" --host zcode",
+            "commandWindows": "py -3 \"%CLAUDE_PLUGIN_ROOT%\\hooks\\activate.py\" --host zcode",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

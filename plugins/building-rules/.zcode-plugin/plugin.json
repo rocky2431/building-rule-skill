@@ -1,6 +1,6 @@
 {
   "name": "building-rules",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Deliver complete engineering outcomes with proportionate investigation, implementation, verification and records.",
   "author": {
     "name": "rocky2431",
@@ -8,5 +8,6 @@
   },
   "repository": "https://github.com/rocky2431/building-rule-skill",
   "license": "MIT",
-  "skills": "skills"
+  "skills": "skills",
+  "hooks": "./hooks/zcode.json"
 }
