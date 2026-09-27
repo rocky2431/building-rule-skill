@@ -1,0 +1,24 @@
+{
+  "name": "building-rules",
+  "version": "0.1.0",
+  "description": "Deliver complete engineering outcomes with proportionate investigation, implementation, verification and records.",
+  "author": {
+    "name": "rocky2431",
+    "url": "https://github.com/rocky2431"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Building Rules",
+    "shortDescription": "Complete features with proportionate engineering",
+    "longDescription": "Deliver complete engineering outcomes with proportionate investigation, implementation, verification and records. Shared Skill, conditional cases and a brief advisory lifecycle core; no task runner or model reviewer.",
+    "developerName": "rocky2431",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Skills",
+      "Hooks"
+    ],
+    "defaultPrompt": "Use $building-rules to complete this engineering task with the smallest sufficient change and verification."
+  },
+  "repository": "https://github.com/rocky2431/building-rule-skill",
+  "license": "MIT"
+}

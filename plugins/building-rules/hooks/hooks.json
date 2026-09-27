@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${PLUGIN_ROOT:-}\" ]; then python3 \"$PLUGIN_ROOT/hooks/activate.py\" --host codex; elif [ -n \"${ZCODE_PLUGIN_ROOT:-}\" ]; then python3 \"$ZCODE_PLUGIN_ROOT/hooks/activate.py\" --host zcode; else python3 \"${CLAUDE_PLUGIN_ROOT:?}/hooks/activate.py\" --host claude; fi",
+            "commandWindows": "if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\hooks\\activate.py\" --host codex) else if defined ZCODE_PLUGIN_ROOT (py -3 \"%ZCODE_PLUGIN_ROOT%\\hooks\\activate.py\" --host zcode) else (py -3 \"%CLAUDE_PLUGIN_ROOT%\\hooks\\activate.py\" --host claude)",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${PLUGIN_ROOT:-}\" ]; then python3 \"$PLUGIN_ROOT/hooks/activate.py\" --host codex; elif [ -n \"${ZCODE_PLUGIN_ROOT:-}\" ]; then python3 \"$ZCODE_PLUGIN_ROOT/hooks/activate.py\" --host zcode; else python3 \"${CLAUDE_PLUGIN_ROOT:?}/hooks/activate.py\" --host claude; fi",
+            "commandWindows": "if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\hooks\\activate.py\" --host codex) else if defined ZCODE_PLUGIN_ROOT (py -3 \"%ZCODE_PLUGIN_ROOT%\\hooks\\activate.py\" --host zcode) else (py -3 \"%CLAUDE_PLUGIN_ROOT%\\hooks\\activate.py\" --host claude)",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

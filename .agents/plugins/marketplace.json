@@ -1,0 +1,20 @@
+{
+  "name": "rocky-building-rules",
+  "interface": {
+    "displayName": "Rocky Building Rules"
+  },
+  "plugins": [
+    {
+      "name": "building-rules",
+      "source": {
+        "source": "local",
+        "path": "./plugins/building-rules"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

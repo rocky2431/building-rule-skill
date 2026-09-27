@@ -1,0 +1,14 @@
+{
+  "name": "rocky-building-rules",
+  "description": "Reusable engineering rules for complete delivery with proportionate effort.",
+  "owner": {
+    "name": "rocky2431"
+  },
+  "plugins": [
+    {
+      "name": "building-rules",
+      "source": "./plugins/building-rules",
+      "description": "Deliver complete engineering outcomes with proportionate investigation, implementation, verification and records."
+    }
+  ]
+}

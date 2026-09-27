@@ -1,0 +1,6 @@
+interface:
+  display_name: "Building Rules"
+  short_description: "Deliver complete features with proportionate engineering"
+  default_prompt: "Use $building-rules to complete this engineering task with the smallest sufficient change and verification."
+policy:
+  allow_implicit_invocation: true
