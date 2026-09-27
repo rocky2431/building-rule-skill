@@ -8,7 +8,7 @@ Building Rules 帮助 coding agent 完整交付约定功能，并控制调查、
 适用于功能开发、修复、重构和代码审查。插件遵守用户要求与项目规则；
 普通写作、事实问答与非工程研究无需加载工程流程。
 
-版本：0.1.1。可选生命周期 hook 仅使用 Python 标准库。
+版本：0.1.2。可选生命周期 hook 仅使用 Python 标准库。
 共享 Skill 提供 Codex、Claude Code、Kimi Code 和 zCode 的原生插件包。
 
 ## 安装与使用
@@ -37,8 +37,9 @@ claude plugin install building-rules@rocky-building-rules
 
 在 Kimi Code 的插件管理器中安装 `https://github.com/rocky2431/building-rule-skill`。
 仓库根目录的 `kimi.plugin.json` 指向共享插件包。zCode 从本仓库 marketplace 加载
-`building-rules@rocky-building-rules`，通过 `hooks/zcode.json` 只加载其支持的
-SessionStart 事件。安装界面可能随版本变化，以实际管理器为准。
+`building-rules@rocky-building-rules`，通过 `hooks/hooks.json` 只加载其支持的
+SessionStart 事件。Codex 和 Claude Code 另外加载 `hooks/subagent.json`；zCode
+不加载该文件。安装界面可能随版本变化，以实际管理器为准。
 
 其他支持 Agent Skills 的宿主可加载
 `plugins/building-rules/skills/building-rules`。

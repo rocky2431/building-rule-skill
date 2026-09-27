@@ -1,11 +1,12 @@
 {
   "name": "building-rules",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Deliver complete engineering outcomes with proportionate investigation, implementation, verification and records.",
   "author": {
     "name": "rocky2431",
     "url": "https://github.com/rocky2431"
   },
   "repository": "https://github.com/rocky2431/building-rule-skill",
-  "license": "MIT"
+  "license": "MIT",
+  "hooks": "./hooks/subagent.json"
 }

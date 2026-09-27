@@ -1,12 +1,13 @@
 {
   "name": "building-rules",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Deliver complete engineering outcomes with proportionate investigation, implementation, verification and records.",
   "author": {
     "name": "rocky2431",
     "url": "https://github.com/rocky2431"
   },
   "skills": "./skills/",
+  "hooks": ["./hooks/hooks.json", "./hooks/subagent.json"],
   "interface": {
     "displayName": "Building Rules",
     "shortDescription": "Complete features with proportionate engineering",

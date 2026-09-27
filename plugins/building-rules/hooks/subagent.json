@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${PLUGIN_ROOT:-}\" ]; then python3 \"$PLUGIN_ROOT/hooks/activate.py\" --host codex; else python3 \"${CLAUDE_PLUGIN_ROOT:?}/hooks/activate.py\" --host claude; fi",
+            "commandWindows": "if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\hooks\\activate.py\" --host codex) else (py -3 \"%CLAUDE_PLUGIN_ROOT%\\hooks\\activate.py\" --host claude)",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -84,7 +84,7 @@ class PluginChecks(unittest.TestCase):
                      ".zcode-plugin/plugin.json", "kimi.plugin.json"]:
             manifest = json.loads((PLUGIN / name).read_text())
             self.assertEqual(manifest["name"], PLUGIN.name)
-            self.assertEqual(manifest["version"], "0.1.1")
+            self.assertEqual(manifest["version"], "0.1.2")
         codex = json.loads((ROOT / ".agents/plugins/marketplace.json").read_text())
         claude = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
         self.assertEqual(codex["name"], claude["name"])
@@ -94,7 +94,7 @@ class PluginChecks(unittest.TestCase):
         for base in [ROOT, PLUGIN]:
             kimi = json.loads((base / "kimi.plugin.json").read_text())
             self.assertEqual(kimi["name"], PLUGIN.name)
-            self.assertEqual(kimi["version"], "0.1.1")
+            self.assertEqual(kimi["version"], "0.1.2")
             for folder in kimi["skills"]:
                 self.assertTrue((base / folder / "building-rules/SKILL.md").is_file())
             result = subprocess.run(
@@ -104,9 +104,15 @@ class PluginChecks(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn("Building Rules core", result.stdout)
+        default = json.loads((PLUGIN / "hooks/hooks.json").read_text())["hooks"]
+        self.assertEqual(set(default), {"SessionStart"})
         zcode = json.loads((PLUGIN / ".zcode-plugin/plugin.json").read_text())
-        hooks = json.loads((PLUGIN / zcode["hooks"]).read_text())["hooks"]
-        self.assertEqual(set(hooks), {"SessionStart"})
+        self.assertNotIn("hooks", zcode)  # zCode merges explicit and default files.
+        codex = json.loads((PLUGIN / ".codex-plugin/plugin.json").read_text())
+        claude = json.loads((PLUGIN / ".claude-plugin/plugin.json").read_text())
+        for paths in [codex["hooks"], ["./hooks/hooks.json", claude["hooks"]]]:
+            events = [event for path in paths for event in json.loads((PLUGIN / path).read_text())["hooks"]]
+            self.assertCountEqual(events, ["SessionStart", "SubagentStart"])
 
 
 if __name__ == "__main__":
