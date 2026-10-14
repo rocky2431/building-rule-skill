@@ -8,8 +8,8 @@ Building Rules 帮助 coding agent 完整交付约定功能，并控制调查、
 适用于功能开发、修复、重构和代码审查。插件遵守用户要求与项目规则；
 普通写作、事实问答与非工程研究无需加载工程流程。
 
-版本：0.1.2。可选生命周期 hook 仅使用 Python 标准库。
-共享 Skill 提供 Codex、Claude Code、Kimi Code 和 zCode 的原生插件包。
+版本：0.2.0。可选生命周期 hook 仅使用 Python 标准库。
+共享 Skill 提供 Codex、Claude Code、Kimi Code、zCode 和 Grok Build 的原生插件包。
 
 ## 安装与使用
 
@@ -52,9 +52,13 @@ SessionStart 事件。Codex 和 Claude Code 另外加载 `hooks/subagent.json`�
 | Codex、Claude Code | 启动、恢复、清空、压缩后，以及子 agent 启动 |
 | zCode | 启动、恢复、清空、压缩后 |
 | Kimi Code | UserPromptSubmit，在下一条用户消息发起的模型请求前 |
+| Grok Build | 启动、恢复或压缩后的第一次 PostToolUse |
 | 仅支持 Skill 的宿主 | 显式调用或宿主自动选择 |
 
 执行取决于宿主版本和信任设置。Kimi 的入口不证明没有新用户消息时也能在自主续跑中恢复。
+Grok 忽略 SessionStart 输出，因此原生适配在该边界后的首次工具结果中注入一次；
+没有工具调用的会话不会收到这段上下文。添加 Excellent Skill Marketplace 后，
+使用 `grok plugin install building-rules --trust` 安装。
 hook 只输出简短工程核心与 Skill 路径，不调用模型、不编辑项目、不阻断工具、不创建任务记录。
 它提供行为指导，真正的安全边界由运行环境执行。停用时使用原生插件或 hook 控制。
 

@@ -10,8 +10,8 @@ Use it for features, debugging, refactoring and code review. It does not impose
 a fixed development ceremony, replace project instructions or turn unrelated
 writing and research into coding tasks.
 
-Version: 0.1.2. The optional lifecycle hook uses the Python standard library.
-One shared Skill is packaged for Codex, Claude Code, Kimi Code and zCode.
+Version: 0.2.0. The optional lifecycle hook uses the Python standard library.
+One shared Skill is packaged for Codex, Claude Code, Kimi Code, zCode and Grok Build.
 
 ## Install and use
 
@@ -56,10 +56,14 @@ compatible hook, invoke it explicitly and read its core from the Skill.
 | Codex and Claude Code | Session start, resume, clear, compaction and subagent start |
 | zCode | Session start, resume, clear and compaction |
 | Kimi Code | UserPromptSubmit before the next user-origin model request |
+| Grok Build | First PostToolUse after startup, resume or compaction |
 | Portable Skill | Explicit or host-selected invocation |
 
 Hook support depends on the installed host and trust settings. Kimi's entry does
 not prove recovery during autonomous continuation without a new user message.
+Grok ignores SessionStart output, so its native manifest uses a once-per-boundary
+PostToolUse injection. A session without tool use receives no such context.
+Install from Excellent Skill Marketplace with `grok plugin install building-rules --trust`.
 The hook emits the engineering core and a Skill path. It does not call a model,
 edit projects, block tools or create task records. It is advisory, not a security
 boundary. Disable it with the native plugin/hook controls.

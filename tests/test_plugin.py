@@ -79,12 +79,36 @@ class PluginChecks(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(json.loads(result.stdout)["hookSpecificOutput"]["hookEventName"], "SessionStart")
 
+    def test_grok_context_survives_observation_only_events(self):
+        with tempfile.TemporaryDirectory() as directory:
+            env = dict(os.environ, GROK_PLUGIN_DATA=directory)
+            def run(name, session="native-grok"):
+                return subprocess.run(
+                    [sys.executable, str(PLUGIN / "hooks/activate.py"), "--host", "grok"],
+                    input=json.dumps({"hook_event_name": name, "sessionId": session,
+                                      "cwd": str(ROOT)}), text=True, capture_output=True, env=env,
+                )
+            self.assertEqual(run("SessionStart").stdout, "")
+            first = run("PostToolUse")
+            self.assertEqual(first.returncode, 0, first.stderr)
+            self.assertIn("Building Rules core", json.loads(first.stdout)["hookSpecificOutput"]["additionalContext"])
+            self.assertEqual(run("PostToolUse").stdout, "")
+            self.assertEqual(run("PostCompact").stdout, "")
+            self.assertIn("Building Rules core", run("PostToolUse").stdout)
+            self.assertEqual(run("PostToolUse", session="").stdout, "")
+            self.assertEqual(run("SessionEnd").stdout, "")
+            self.assertFalse(any(Path(directory).rglob("*.sent")))
+        manifest = json.loads((PLUGIN / ".grok-plugin/plugin.json").read_text())
+        hooks = json.loads((PLUGIN / manifest["hooks"]).read_text())["hooks"]
+        self.assertIn("PostToolUse", hooks)
+        self.assertNotIn("SubagentStart", hooks)
+
     def test_native_package_paths(self):
         for name in [".codex-plugin/plugin.json", ".claude-plugin/plugin.json",
-                     ".zcode-plugin/plugin.json", "kimi.plugin.json"]:
+                     ".zcode-plugin/plugin.json", ".grok-plugin/plugin.json", "kimi.plugin.json"]:
             manifest = json.loads((PLUGIN / name).read_text())
             self.assertEqual(manifest["name"], PLUGIN.name)
-            self.assertEqual(manifest["version"], "0.1.2")
+            self.assertEqual(manifest["version"], "0.2.0")
         codex = json.loads((ROOT / ".agents/plugins/marketplace.json").read_text())
         claude = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
         self.assertEqual(codex["name"], claude["name"])
@@ -94,7 +118,7 @@ class PluginChecks(unittest.TestCase):
         for base in [ROOT, PLUGIN]:
             kimi = json.loads((base / "kimi.plugin.json").read_text())
             self.assertEqual(kimi["name"], PLUGIN.name)
-            self.assertEqual(kimi["version"], "0.1.2")
+            self.assertEqual(kimi["version"], "0.2.0")
             for folder in kimi["skills"]:
                 self.assertTrue((base / folder / "building-rules/SKILL.md").is_file())
             result = subprocess.run(
