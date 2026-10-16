@@ -39,6 +39,11 @@ Look for the capability already in the codebase, then the standard library,
 native platform and installed dependencies. Use the first sufficient option.
 Understand its callers before changing shared behavior. Preserve unrelated work.
 
+When flags or branches repeat the same domain rules, check whether the data shape
+permits contradictory states. Prefer a small state, type or lookup structure that
+removes those contradictions while preserving public contracts. Keep clear local
+logic when a new abstraction would only add indirection; see [domain modeling](references/pitfalls.md#modeling).
+
 Do not shrink the requested functionality to make implementation easier. Add
 abstractions, retries, permission layers or persistence only for a current
 requirement, observed failure or concrete credible constraint. Optional cleanup
@@ -50,6 +55,10 @@ work. Input validation at a real trust boundary is part of usable functionality.
 Read [pitfalls](references/pitfalls.md#risk) when safety and delivery priorities
 conflict; neither a hypothetical attack nor a small diff decides severity.
 
+For a sweep or migration, work in coherent, verifiable units and check one before
+building on it. Reuse a command or script when it makes repeated work or important
+evidence reproducible. A small edit needs no new tool; see [units and tools](references/pitfalls.md#units).
+
 ## Verify the behavior that changed
 
 Select the smallest sufficient existing checks for the changed behavior, shared
@@ -58,6 +67,13 @@ full suite can be the simplest check. Do not expand testing just because a
 focused check passed.
 
 Add a regression check only for an inadequately covered concrete failure.
+Drive the public interface with concrete inputs and derive expected results from
+the contract. Ask whether the check catches a wrong result or missing effect, and
+whether it survives an internal refactor that preserves behavior. Required checks
+and observable boundary interactions still count; see [meaningful checks](references/pitfalls.md#verification).
+A call count can pin an internal choice even for a standard-library method. Keep
+it as a regression assertion only when that particular interaction is part of the
+contract; otherwise use an implementation-specific probe as diagnostic evidence.
 Exercise a rejecting counterexample when adding a runtime-enforced constraint.
 Do not weaken assertions, fabricate data or replace a required integration path
 with a mock to obtain a pass. For UI changes, inspect the actual render; for an
@@ -66,7 +82,13 @@ integration, check the real boundary needed by the requested outcome.
 Reuse passing evidence while its code, inputs and relevant environment remain
 valid. Triage a failure with the smallest distinguishing check. Confirmed unrelated
 failures are reported, not repaired unless they block the task or the owner asks.
-Repeated failure requires revisiting a premise rather than blindly adding retries.
+If repeated fixes fail the same way, name their shared premise and test an
+observation that distinguishes it from an alternative before another repair; see
+[failed premises](references/pitfalls.md#premise).
+
+For a performance request, measure the relevant baseline and changed behavior on
+the same workload. Try removing unused or repeated work before adding concurrency
+or caching, and stop when the agreed target is met; see [performance](references/pitfalls.md#performance).
 
 ## Finish and report
 

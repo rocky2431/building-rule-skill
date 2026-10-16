@@ -108,7 +108,7 @@ class PluginChecks(unittest.TestCase):
                      ".zcode-plugin/plugin.json", ".grok-plugin/plugin.json", "kimi.plugin.json"]:
             manifest = json.loads((PLUGIN / name).read_text())
             self.assertEqual(manifest["name"], PLUGIN.name)
-            self.assertEqual(manifest["version"], "0.2.0")
+            self.assertEqual(manifest["version"], "0.3.0")
         codex = json.loads((ROOT / ".agents/plugins/marketplace.json").read_text())
         claude = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
         self.assertEqual(codex["name"], claude["name"])
@@ -118,7 +118,7 @@ class PluginChecks(unittest.TestCase):
         for base in [ROOT, PLUGIN]:
             kimi = json.loads((base / "kimi.plugin.json").read_text())
             self.assertEqual(kimi["name"], PLUGIN.name)
-            self.assertEqual(kimi["version"], "0.2.0")
+            self.assertEqual(kimi["version"], "0.3.0")
             for folder in kimi["skills"]:
                 self.assertTrue((base / folder / "building-rules/SKILL.md").is_file())
             result = subprocess.run(

@@ -10,7 +10,7 @@ Use it for features, debugging, refactoring and code review. It does not impose
 a fixed development ceremony, replace project instructions or turn unrelated
 writing and research into coding tasks.
 
-Version: 0.2.0. The optional lifecycle hook uses the Python standard library.
+Version: 0.3.0. The optional lifecycle hook uses the Python standard library.
 One shared Skill is packaged for Codex, Claude Code, Kimi Code, zCode and Grok Build.
 
 ## Install and use
@@ -83,6 +83,12 @@ The Skill covers scope drift, excessive exploration, misleading green checks,
 missing integration, disproportionate hardening, recovery errors, coordination
 overhead, external effects and excessive records.
 
+For relevant tasks, it also checks whether data structures express domain rules,
+tests assumptions shared by failed repairs, and verifies observable behavior.
+Batch work proceeds in checkable units; rerunnable tools and performance
+measurements are used when the task justifies them. These conditional methods
+are adapted from [pstack](plugins/building-rules/skills/building-rules/references/sources.md#pstack-methods).
+
 Owner policies remain separate from reusable advice. If an owner requires an
 allocation such as 80% business code, apply it across the whole feature delivery
 without padding or weakening necessary tests. This package does not impose that
@@ -104,6 +110,11 @@ Package and hook checks establish file discovery and emitted context, not model
 compliance or productivity gains. No comparative model result is claimed for this
 release. Native runtime behavior beyond documented local checks is unverified;
 the Windows command adapter has not been run on Windows.
+
+[Local candidate observations](tests/observations/2026-10-17-engineering.json)
+record three code scenarios and one correction run on Codex, including a failed
+test-refactor probe and its follow-up. They do not establish general reliability
+or productivity gains.
 
 Publication, registration in another marketplace and installation are separate
 actions. This repository is independently installable, with no mandatory dependency

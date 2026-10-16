@@ -3,6 +3,8 @@
 Sources inform conditional rules. Official documentation describes supported
 mechanisms; an issue describes a reported experience; neither alone proves that a
 particular policy improves all engineering work. Last checked: 2026-09-27.
+The pstack material below was inspected separately on 2026-10-17; this does not
+refresh the older sources' verification dates.
 
 <a id="claude-guidance"></a>
 ## Claude guidance
@@ -50,6 +52,34 @@ execution and model compliance are separate observations.
 records semantic drift, simulated validation and the adverse effects of excessive
 blocking. It motivates retaining intent and evidence without inheriting every
 historical workflow stage. This package does not depend on that runtime.
+
+<a id="pstack-methods"></a>
+## Conditional methods adapted from pstack
+
+Inspected the upstream source on 2026-10-17 at commit
+`6f131f137de64fdaf928278c0fd9ecec520ccbee`. These are author-proposed engineering
+methods, not independent model comparisons or evidence of general productivity gains.
+
+- [Model the Domain](https://github.com/backnotprop/pstack/blob/6f131f137de64fdaf928278c0fd9ecec520ccbee/skills/principle-model-the-domain/SKILL.md):
+  use a data shape that captures real invariants; retain simple local code when
+  abstraction adds no benefit.
+- [Attack the Premise](https://github.com/backnotprop/pstack/blob/6f131f137de64fdaf928278c0fd9ecec520ccbee/skills/principle-attack-the-premise/SKILL.md):
+  test the assumption shared by failed repairs before another adjustment.
+- [Test Behavior, Not Implementation](https://github.com/backnotprop/pstack/blob/6f131f137de64fdaf928278c0fd9ecec520ccbee/skills/principle-test-behavior-not-implementation/SKILL.md):
+  judge a test by a broken observable result and a behavior-preserving refactor.
+- [Sequence Verifiable Units](https://github.com/backnotprop/pstack/blob/6f131f137de64fdaf928278c0fd9ecec520ccbee/skills/principle-sequence-verifiable-units/SKILL.md):
+  localize failures by verifying a coherent unit before building on it.
+- [Build the Lever](https://github.com/backnotprop/pstack/blob/6f131f137de64fdaf928278c0fd9ecec520ccbee/skills/principle-build-the-lever/SKILL.md):
+  make important work rerunnable. Building Rules narrows this to justified reuse,
+  repetition or error risk; it does not demand a new file for every nontrivial task.
+- [Performance Issue](https://github.com/backnotprop/pstack/blob/6f131f137de64fdaf928278c0fd9ecec520ccbee/skills/poteto-mode/playbooks/perf-issue.md):
+  measure comparable workloads and try removing unused or repeated work first.
+
+Adoption is selective. The package does not inherit pstack's mandatory agent
+workflow, model choices, tool-building default, rebasing or publication steps.
+Existing authority, project contracts and trust-boundary validation still apply.
+Portable-Skill behavior observations belong in the repository's `tests/observations/`;
+one successful case does not establish broad reliability or causal improvement.
 
 ## Maintaining a rule
 
