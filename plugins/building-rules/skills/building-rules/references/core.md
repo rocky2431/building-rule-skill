@@ -11,6 +11,12 @@ rules take precedence. Respect an explicit user opt-out.
   complete change, with no speculative frameworks or unrelated cleanup.
 - Keep necessary credential, authorization and data-loss protections. Address
   currently reachable serious risks; defer optional hardening until major features work.
+- Check untrusted input once, where it enters: users, network, files, other
+  processes, model output and stored records read back. Pass internal code the
+  checked value and let it rely on that. When a result is unknown, return an error
+  or an explicit unknown rather than a substitute value.
+- Before reporting, match each guard, fallback, retry, hash or recovery path the
+  change adds to the requirement or observed failure it serves; remove the rest.
 - Run the smallest sufficient checks. Add tests for uncovered concrete failures,
   not every edit. Never weaken an assertion or required behavior to get a pass.
 - Stop when the agreed behavior and necessary checks are complete. New optional

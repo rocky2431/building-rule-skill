@@ -81,6 +81,19 @@ Existing authority, project contracts and trust-boundary validation still apply.
 Portable-Skill behavior observations belong in the repository's `tests/observations/`;
 one successful case does not establish broad reliability or causal improvement.
 
+<a id="defensive-code"></a>
+## Defensive code at trust boundaries
+
+Checked 2026-10-30. The [OpenAI Codex prompting guide](https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide)
+asks for no broad catches or success-shaped fallbacks and for errors to be
+surfaced explicitly. Alexis King's [Parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+converts input once at the boundary into a type that carries the guarantee forward.
+[arXiv 2609.04061](https://arxiv.org/abs/2609.04061) reports that a preservation
+instruction reduced excess edits on synthetic BigCodeBench repairs; it was a
+per-task prompt, not a standing instruction file, and does not measure guard counts.
+These support the boundary and self-check rules as conditional methods; no
+reduction in defensive code from this package's wording has been measured yet.
+
 ## Maintaining a rule
 
 Add or revise a rule for a concrete failure or decision-changing source. Record its

@@ -139,14 +139,20 @@ application. Evidence must match the requested outcome, not a universal E2E ritu
 
 **Trigger:** pressure to remove needed safeguards, or every imagined edge case
 starts blocking feature work.
-**Failure:** either present harm or indefinite defensive development.
+**Failure:** either present harm or indefinite defensive development: each layer
+re-verifies what the previous one checked, fallbacks substitute values for unknown
+results, and every repair adds another recovery variant.
 **Minimum response:** identify a reachable trigger, relevant assets and concrete
 harm. Preserve necessary trust-boundary protection and repair serious current risk.
+Validate at the boundary once and let internal code rely on the checked value.
 Schedule optional hardening after major features.
 **Stop:** the present risk and the feature's required checks are addressed.
-**Exception:** required security audits, regulated environments or explicitly
-requested security work can demand broader coverage. Never invent an exemption
-from the owner's or project's real requirements.
+**Exception:** a required security audit, a regulated environment or a security
+task the owner explicitly requested can demand broader coverage within that task.
+A product that has security or provenance features does not make every change
+security work; each added check still names its requirement or observed failure.
+Never invent an exemption from the owner's or project's real requirements.
+**Evidence:** [defensive code at trust boundaries](sources.md#defensive-code).
 
 <a id="recovery"></a>
 ## A summary changes intent or authority

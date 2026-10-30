@@ -10,7 +10,7 @@ Use it for features, debugging, refactoring and code review. It does not impose
 a fixed development ceremony, replace project instructions or turn unrelated
 writing and research into coding tasks.
 
-Version: 0.3.0. The optional lifecycle hook uses the Python standard library.
+Version: 0.3.1. The optional lifecycle hook uses the Python standard library.
 One shared Skill is packaged for Codex, Claude Code, Kimi Code, zCode and Grok Build.
 
 ## Install and use

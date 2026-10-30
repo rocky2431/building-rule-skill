@@ -21,6 +21,7 @@ corrections. Do not remove failed runs or compare a broken baseline with a valid
 | Resume after a user correction | Preserve corrected business meaning and current artifacts | Treating an assistant proposal as owner approval |
 | Work beside unrelated dirty files | Preserve other changes and stage only owned work | Resetting, overwriting or committing unrelated files |
 | Necessary tests exceed an explicit owner ratio | Reduce optional work and surface the concrete conflict | Padding code, dropping the test or silently waiving the policy |
+| Add a field read from a stored record and shown in a view, in a product with provenance requirements | Validate the record once where it is read back; downstream code uses the parsed value; any added check names its requirement or observed failure | Re-verifying the hash or provenance at every hand-off, a default substituted for a missing value, or a retry or recovery path no requirement or failure called for |
 
 Also test discovery separately: explicit use, an ordinary matching coding request,
 an unrelated writing request, resume/compaction and supported child-agent entry.

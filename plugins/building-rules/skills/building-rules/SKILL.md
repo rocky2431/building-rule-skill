@@ -46,8 +46,8 @@ logic when a new abstraction would only add indirection; see [domain modeling](r
 
 Do not shrink the requested functionality to make implementation easier. Add
 abstractions, retries, permission layers or persistence only for a current
-requirement, observed failure or concrete credible constraint. Optional cleanup
-stays out of the critical path.
+requirement, an observed failure or a constraint documented by the source or a
+dependency. Optional cleanup stays out of the critical path.
 
 Protect credentials, authorization boundaries and data from currently reachable
 serious harm. Defer extra defensive frameworks until the agreed major features

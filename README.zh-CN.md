@@ -8,7 +8,7 @@ Building Rules 帮助 coding agent 完整交付约定功能，并控制调查、
 适用于功能开发、修复、重构和代码审查。插件遵守用户要求与项目规则；
 普通写作、事实问答与非工程研究无需加载工程流程。
 
-版本：0.3.0。可选生命周期 hook 仅使用 Python 标准库。
+版本：0.3.1。可选生命周期 hook 仅使用 Python 标准库。
 共享 Skill 提供 Codex、Claude Code、Kimi Code、zCode 和 Grok Build 的原生插件包。
 
 ## 安装与使用
